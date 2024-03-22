@@ -15,11 +15,23 @@ public class EmployeeImplement implements Manageable
     {
         for (Employee e : employeeList)
         {   //Lấy key là tên phòng ban, nếu nhân viên
-            // có tên phòng ban trùng khớp thì tăng số đếm lên 1, không thì tạokey value pair mới
+            // có tên phòng ban trùng khớp thì tăng số đếm lên 1, không thì tạo key value pair mới
             String key = e.getDepartment().getDepartmentName();
             if (!departmentMember.containsKey(key))
                 departmentMember.put(key, 1);
             else departmentMember.put(key, departmentMember.get(key) + 1);
+        }
+    }
+
+    private void removeMemberFromDepartment()
+    {
+        for (Employee e : employeeList)
+        {   //Lấy key là tên phòng ban, nếu nhân viên
+            // có tên phòng ban trùng khớp thì giảm số đếm đi 1
+            String key = e.getDepartment().getDepartmentName();
+            //Chỉ giảm số lượng nhân viên khi số này lớn hơn 0 (đang có nhân viên)
+            if (departmentMember.containsKey(key) && departmentMember.get(key) > 0)
+                departmentMember.put(key, departmentMember.get(key) - 1);
         }
     }
 
