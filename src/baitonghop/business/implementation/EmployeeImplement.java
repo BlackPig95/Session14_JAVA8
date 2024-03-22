@@ -43,6 +43,7 @@ public class EmployeeImplement implements Manageable
         newEm.inputData();
         employeeList.add(newEm);
         System.out.println("Thêm nhân viên thành công");
+        addMemberToDepartment();
     }
 
     @Override
@@ -133,6 +134,7 @@ public class EmployeeImplement implements Manageable
             employeeList.remove(index);
             System.out.println("Đã xóa nhân viên");
         } else System.out.println("Không tìm thấy nhân viên");
+        removeMemberFromDepartment();
     }
 
     @Override
