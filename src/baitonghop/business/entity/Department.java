@@ -34,6 +34,8 @@ public class Department
         {
             System.out.println("Mời nhập tên phòng ban");
             this.departmentName = InputMethods.getString();
+            if (DepartmentImplement.departmentList.isEmpty())
+                break;
             for (int i = 0; i < DepartmentImplement.departmentList.size(); i++)
             {
                 if (departmentName.equals(DepartmentImplement.departmentList.get(i).departmentName))
@@ -42,7 +44,6 @@ public class Department
                 } else break outer;
             }
         }
-
     }
 
     public Department()
@@ -74,8 +75,9 @@ public class Department
         return totalMembers;
     }
 
-    public void setTotalMembers(int totalMembers)
+    public void setTotalMembers()
     {
-        this.totalMembers = totalMembers;
+        //Truy cập vào map quản lý phòng ban, get ra số lượng nhân viên hoặc set về 0 nếu là phòng ban mới
+        this.totalMembers = EmployeeImplement.departmentMember.getOrDefault(this.departmentId, 0);
     }
 }

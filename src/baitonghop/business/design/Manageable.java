@@ -2,9 +2,9 @@ package baitonghop.business.design;
 
 public interface Manageable
 {
-    void displayAll(); //Hiển thị thông tin của tất cả các phần tử
+    void manageEntities();//Hàm quản lý chung, để gọi tất cả các hàm khác
 
-    void displayInfo();//Hiển thị thông tin của từng phần tử
+    void displayAll(); //Hiển thị thông tin của tất cả các phần tử
 
     void addElement();//Thêm phần tử mới
 
@@ -14,5 +14,5 @@ public interface Manageable
 
     void deleteElement();//Xóa phần tử
 
-    int searchById(String id);//Trả về index của id cần tìm để thực hiện các thao tác quản lý khác
+    int searchById();
 }
