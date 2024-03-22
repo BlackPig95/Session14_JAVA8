@@ -1,7 +1,10 @@
 package baitap;
 
+import baitonghop.business.config.InputMethods;
+
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Bai1_2_3_5_8
@@ -34,6 +37,12 @@ public class Bai1_2_3_5_8
         System.out.println("Nhập một số để xác định giới hạn dưới");
         int underBound = Integer.parseInt(scanner.nextLine());
         arrayList.stream().filter(num -> num > underBound).forEach(num -> System.out.print(num + " "));
+        //Bai 7
+        System.out.println("Nhập số nguyên thứ nhất");
+        int num1 = InputMethods.getInteger();
+        System.out.println("Nhập số nguyên thứ hai");
+        int num2 = InputMethods.getInteger();
+        IntStream.range(num1, num2 + 1).forEach(i -> System.out.print(" " + i));
         //bai 8 anyMatch
         System.out.println();
         boolean isExist = arrayList.stream().anyMatch(num -> num % 2 == 0);
