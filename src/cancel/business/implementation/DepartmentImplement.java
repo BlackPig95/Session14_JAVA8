@@ -1,9 +1,9 @@
-package baitonghop.business.implementation;
+package cancel.business.implementation;
 
-import baitonghop.business.config.InputMethods;
-import baitonghop.business.design.Manageable;
-import baitonghop.business.entity.Department;
-import baitonghop.business.entity.Employee;
+import cancel.business.config.InputMethods;
+import cancel.business.design.Manageable;
+import cancel.business.entity.Department;
+import cancel.business.entity.Employee;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
-package baitonghop.business.implementation;
+package cancel.business.implementation;
 
-import baitonghop.business.config.InputMethods;
-import baitonghop.business.design.Manageable;
-import baitonghop.business.entity.Employee;
+import cancel.business.config.InputMethods;
+import cancel.business.design.Manageable;
+import cancel.business.entity.Employee;
 
 import java.util.*;
 
@@ -87,9 +87,14 @@ public class EmployeeImplement implements Manageable
     @Override
     public void addElement()
     {
+        if (DepartmentImplement.departmentList.isEmpty())
+        {
+            System.out.println("Hiện không có phòng ban nào, vui lòng thêm phòng ban trước khi thêm nhân viên");
+            return;
+        }
         Employee newEm = new Employee();
         System.out.println("Mời nhập thông tin cho nhân viên mới");
-        newEm.inputData();
+        newEm.inputData(employeeList);
         employeeList.add(newEm);
         System.out.println("Thêm nhân viên thành công");
         addMemberToDepartment();//Thêm nhân viên vào map quản lý số nhân viên mỗi phòng ban
@@ -126,7 +131,7 @@ public class EmployeeImplement implements Manageable
             System.out.println("Thông tin cũ:");
             employeeList.get(index).displayData();
             System.out.println("Vui lòng nhập thông tin mới");
-            employeeList.get(index).inputData();
+            employeeList.get(index).inputData(employeeList);
         } else System.out.println("Không tìm thấy nhân viên");
     }
 

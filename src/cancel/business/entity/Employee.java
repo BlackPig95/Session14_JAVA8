@@ -1,9 +1,10 @@
-package baitonghop.business.entity;
+package cancel.business.entity;
 
-import baitonghop.business.config.InputMethods;
-import baitonghop.business.implementation.DepartmentImplement;
+import cancel.business.config.InputMethods;
+import cancel.business.implementation.DepartmentImplement;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Employee
 {
@@ -19,13 +20,21 @@ public class Employee
     {
     }
 
-    public void inputData()
+    public void displayData()
     {
-        if (DepartmentImplement.departmentList.isEmpty())
-        {
-            System.out.println("Hiện không có phòng ban nào, vui lòng thêm phòng ban trước khi thêm nhân viên");
-            return;
-        }
+        System.out.println("Mã nhân viên: " + this.employeeId);
+        System.out.println("Tên nhân viên: " + this.employeeName);
+        System.out.println("Ngày sinh: " + this.birthday);
+        System.out.println("Giới tính: " + (this.sex ? "Nam" : "Nữ"));
+        System.out.println("Lương nhân viên: " + this.salary);
+        System.out.println("Thuộc phòng ban: " + this.department.getDepartmentName());
+        System.out.println("Thông tin người quản lý: "
+                + (this.manager == null ? "Không có"
+                : "\nTên: " + this.manager.employeeName + "\nMã nhân viên: " + this.manager.employeeId));
+    }
+
+    public void inputData(List<Employee> employeeList)
+    {
         while (true)
         {
             System.out.println("Nhập mã nhân viên, bắt đầu bằng ký tự E và có 5 ký tự");
@@ -43,8 +52,14 @@ public class Employee
         this.sex = InputMethods.getBoolean();
         System.out.println("Nhập lương nhân viên");
         this.salary = InputMethods.getDouble();
+        inputDepartment();
+        inputManagerInfo(employeeList);
+    }
+
+    private void inputDepartment()
+    {
+        //Dùng để break vòng while khi thỏa điều kiện
         departmentouter:
-//Dùng để break vòng while khi thỏa điều kiện
         while (true)
         {
             System.out.println("Thông tin các phòng ban hiện có");
@@ -63,6 +78,11 @@ public class Employee
                 } else System.out.println("Vui lòng nhập chính xác tên phòng ban");
             }
         }
+    }
+
+
+    private void inputManagerInfo(List<Employee> employeeList)
+    {
         outer:
         while (true)
         {
@@ -70,11 +90,47 @@ public class Employee
             int choice = InputMethods.getInteger();
             switch (choice)
             {
-                case 1:
-                    System.out.println("Mời nhập thông tin người quản lý");
-                    Employee newManager = new Employee();
-                    newManager.inputData();
-                    this.manager = newManager;
+                case 1://Nếu không có người quản lý nào trong danh sách thì bắt nhập mới
+                    if (employeeList.isEmpty())
+                    {
+                        System.out.println("Mời nhập thông tin người quản lý");
+                        Employee newManager = new Employee();
+                        newManager.inputData(employeeList);
+                        this.manager = newManager;
+                        break outer;
+                    }
+                    System.out.println("Nhập 1 nếu muốn chọn quản lý từ danh sách hiện có, nhập 2 nếu muốn thêm mới");
+                    int managerChoice = InputMethods.getInteger();
+                    if (managerChoice == 1)
+                    {
+                        System.out.println("Danh sách nhân viên có thể chọn làm quản lý");
+                        for (int i = 1; i <= employeeList.size(); i++)
+                        {
+                            System.out.println("Số thứ tự: " + i);
+                            System.out.println("Tên nhân viên: " + employeeList.get(i).employeeName);
+                        }
+                        System.out.println("Nhập số thứ tự người muốn chọn");
+                        int index = InputMethods.getInteger();
+                        if (index >= 1 && index <= employeeList.size())
+                        {
+                            this.manager = employeeList.get(index - 1);
+                        } else
+                        {
+                            System.out.println("Lựa chọn không đúng");
+                            break; //Nhập sai thì không break vòng while, để lựa chọn lại
+                        }
+                    } else if (managerChoice == 2)
+                    {
+                        System.out.println("Mời nhập thông tin người quản lý");
+                        Employee newManager = new Employee();
+                        newManager.inputData(employeeList);
+                        this.manager = newManager;
+                    }
+                    if (managerChoice != 1 && managerChoice != 2)
+                    { //Nếu nhập lựa chọn sai thì không break vòng while để bắt lựa chọn lại
+                        System.out.println("Lựa chọn không khả dụng");
+                        break;
+                    }
                     break outer;
                 case 2:
                     this.manager = null;
@@ -84,19 +140,6 @@ public class Employee
                     break;
             }
         }
-    }
-
-    public void displayData()
-    {
-        System.out.println("Mã nhân viên: " + this.employeeId);
-        System.out.println("Tên nhân viên: " + this.employeeName);
-        System.out.println("Ngày sinh: " + this.birthday);
-        System.out.println("Giới tính: " + (this.sex ? "Nam" : "Nữ"));
-        System.out.println("Lương nhân viên: " + this.salary);
-        System.out.println("Thuộc phòng ban: " + this.department.getDepartmentName());
-        System.out.println("Thông tin người quản lý: "
-                + (this.manager == null ? "Không có"
-                : "\nTên: " + this.manager.employeeName + "\nMã nhân viên: " + this.manager.employeeId));
     }
 
     public String getEmployeeId()
@@ -168,4 +211,5 @@ public class Employee
     {
         this.department = department;
     }
+
 }

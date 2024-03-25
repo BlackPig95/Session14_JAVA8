@@ -1,4 +1,4 @@
-package baitonghop.business.design;
+package cancel.business.design;
 
 public interface Manageable
 {

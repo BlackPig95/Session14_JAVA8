@@ -1,6 +1,6 @@
 package baitap;
 
-import baitonghop.business.config.InputMethods;
+import cancel.business.config.InputMethods;
 
 import java.util.*;
 import java.util.stream.Collectors;

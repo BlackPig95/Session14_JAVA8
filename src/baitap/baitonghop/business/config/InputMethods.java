@@ -1,8 +1,7 @@
-package baitonghop.business.config;
+package baitap.baitonghop.business.config;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -31,7 +30,7 @@ public final class InputMethods
         while (true)
         {
             String result = getInput();
-            if (result.equals(""))
+            if (result.isBlank())
             {
                 System.err.println(EMPTY_ALERT);
                 continue;
@@ -49,9 +48,9 @@ public final class InputMethods
             correct = true;
             try
             {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(CONSTANT.DDMMYYYY);
                 String input = getString();
-                return LocalDate.parse(input);
+                return LocalDate.parse(input, formatter);
             } catch (Exception e)
             {
                 System.out.println("Vui lòng nhập đúng định dạng");

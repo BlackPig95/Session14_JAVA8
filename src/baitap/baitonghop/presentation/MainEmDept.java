@@ -1,16 +1,23 @@
-package baitonghop.presentation;
+package baitap.baitonghop.presentation;
 
-import baitonghop.business.config.InputMethods;
-import baitonghop.business.design.Manageable;
-import baitonghop.business.implementation.DepartmentImplement;
-import baitonghop.business.implementation.EmployeeImplement;
+import baitap.baitonghop.business.config.InputMethods;
+import baitap.baitonghop.business.design.IDepartment;
+import baitap.baitonghop.business.design.IEmployee;
+import baitap.baitonghop.business.design.Manageable;
+import baitap.baitonghop.business.entity.Department;
+import baitap.baitonghop.business.entity.Employee;
+import baitap.baitonghop.business.implementation.DepartmentManagement;
+import baitap.baitonghop.business.implementation.EmployeeManagement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainEmDept
 {
     public static void main(String[] args)
     {
-        Manageable departmentManager = new DepartmentImplement();
-        Manageable employeeManager = new EmployeeImplement();
+        IDepartment departmentManagement = new DepartmentManagement();
+        IEmployee employeeManagement = new EmployeeManagement();
         while (true)
         {
             System.out.println("=============MENU===================");
@@ -22,10 +29,10 @@ public class MainEmDept
             switch (choice)
             {
                 case 1:
-                    departmentManager.manageEntities();
+                    departmentManagement.manageDepartment();
                     break;
                 case 2:
-                    employeeManager.manageEntities();
+                    employeeManagement.manageEmployee();
                     break;
                 case 0:
                     System.exit(0);

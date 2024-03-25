@@ -1,8 +1,8 @@
-package baitonghop.business.entity;
+package cancel.business.entity;
 
-import baitonghop.business.config.InputMethods;
-import baitonghop.business.implementation.DepartmentImplement;
-import baitonghop.business.implementation.EmployeeImplement;
+import cancel.business.config.InputMethods;
+import cancel.business.implementation.DepartmentImplement;
+import cancel.business.implementation.EmployeeImplement;
 
 public class Department
 {
